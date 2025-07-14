@@ -1,0 +1,308 @@
+--------------------------------
+# TestNG - Test Next Generation -> java based unit testing tool
+--------------------------------
+TestNG is a testing framework inspired from JUnit and NUnit but introducing some new functionalities that 
+make it more powerful and easier to use, such as:
+
+1) Annotations
+2) Run your tests in arbitrarily big thread pools with various policies available 
+   (all methods in their own thread, one thread per test class, etc…​)
+3) Test that your code is multithread safe
+4) Flexible test configuration
+5) Support for data-driven testing (with @DataProvider)
+6) Support for parameters
+ 
+
+Advantages:
+-----------
+1) Test cases & test suites
+2) Grouping of test cases
+3) Prioritize
+4) Parameterization
+5) Parallel testing
+6) Reports
+
+TestNG configuration
+---------------------
+1) Install testng in eclipse
+2) add testng library to build path / add testng dependency in pom.xml
+
+
+@Test - annotation marks a method as a test method
+
+1) TestNG execute test methods based on alphabetical order.
+2) @Test(priority=num)  controls the order of execution.
+3) Once you provide priorty to the test methods, then order of methods is not considered.
+4) priorities can be random numbers(no need to have consecutive numbers)
+5) If you dont provide priority then default value is Zero (0).
+6) If the priorities are same then again execute methods in alphabetical order.
+7) Negitive values are allowed in priority.
+8) TestNG execute test methods only if they are having @Test annotation.
+
+execute test cases using testng xml file
+
+test xml file
+--------------
+1) generate automatically
+2) manually
+
+
+Test suite ---> Test cases ----> Test steps
+Xml file   --->  Classes   ----> Test methods
+
+2 things achived through xml
+-----------------------------
+1) executed group of test cases as a 1 suite
+2) we can generate testng reports (default)
+
+
+
+
+  -------------
+#  Annotations
+  -------------
+
+@Test
+
+@BeforeMethod
+@AfterMethod
+
+@BeforeClass
+@AfterClass
+
+@BeforeTest  -> runs based on xml test level
+@AfterTest   -> runs based on xml test level
+
+@BeforeSuite -> runs based on xml test level
+@AfterSuite  -> runs based on xml test level
+
+TC1
+----
+1) Login      ---> @BeforeMethod
+2) Search 	  ---> @Test
+3) Logout  	  ---> @AfterMethod
+4) Login
+5) Adv search ---> @Test
+6) Logout
+
+
+TC2
+----
+1) Login 	  ---> @BeforeClass
+2) Search     ---> @Test
+3) Adv search ---> @Test
+4) Logout     ---> @AfterClass
+
+
+* According to xml Test is ->  a collection of classes
+xml
+----
+<suite name="mysuite>
+	<test name="mytest1>
+		<classes>
+			<class name="xyz"/>
+		<classes>
+	</test>
+	<test name="mytest2>
+		<classes>
+			<class name="abc"/>
+		<classes>
+	</test>
+<suite>
+
+Heirarchy ->
+---------
+@BeforeSuite -> @BeforeTest -> @BeforeClass -> @BeforeMethod -> @Test
+
+@Test -> @AfterMethod -> @AfterClass -> @AfterTest -> @AfterSuite
+
+
+Assertion -> validation point
+---------
+
+2 kinds of assertions
+----------------------
+1) Hard assertions
+2) Soft assertions
+
+
+Hard assertions
+----------------
+we can access from "Assert" class
+methods are static
+* if hard assertion failed then rest of the statements will not be executed.
+
+
+Software assertion
+-------------------
+we can access though "SoftAssert"  object
+
+SoftAssert sa = new SoftAssert();
+sa.assertTrue()
+
+if soft assertion got failed then rest of the statemetns still execute.
+
+# At end of the the method we have to give
+** sa.assertAll(); // mandatory
+** then only it will provide correct test results else will give
+** PASSED for failed statements also
+
+
+  --------------------
+#  Dependency methods
+  --------------------
+
+openapp
+login
+search
+advsearch
+logout
+
+@Test(dependsOnMethods = {"method name1", "method name2", ....})
+
+openapp
+login(dependsOnMethods = {"openapp"})
+search(dependsOnMethods = {"login"})
+advsearch(dependsOnMethods = {"login", "search"})
+logout(dependsOnMethods = {"login"})
+
+
+
+grouping -> (possible only through xml file )
+---------
+class1 -- m1, m2, m3...
+class2 -- m4, m5, m6...
+class3 -- m7, m8, m9....
+
+sanity
+regression
+functional
+
+
+loginByfacebook  - sanity
+loginbyemail     - sanity
+login by twitter - sanity
+
+signupbyfacebook - regression
+signupbytwitter  - regression
+signupbyemail    - regression
+
+paymentinrupees  - sanity, regression (functional)
+paymentindollars - sanity, regression (functional)
+
+1) all sanity tests (use include)
+2) all regression tests (use include)
+3) all sanity but not regression (use include and exclude)
+4) all regression but not sanity (use include and exclude)
+5) all methods which are belongs to both sanity & regression (use include giving diff name to group)
+
+5 ->
+<test name = "groupingTests">
+	<groups>
+		<run>
+			<include name="fuctional"/>
+			<exclude name="sanity"/>
+		</run>
+	</groups>
+
+	<classes>
+		<class name...
+		...
+	</classes>
+</test>
+
+@Test
+----
+priority
+dependsOnMethods
+groups
+etc....
+
+
+
+
+  ------------------
+#  Parameterization
+  ------------------
+
+1) @DataProvider  -- data driven testing
+2) using xml file -- parallel testing
+
+@Test(dataProvider = "dpName")
+void login() { }
+
+@DataProvider(name = "dp") // must provide name of data provider
+Object[][] loginData() { return .. }
+
+
+parallel testing using xml file
+--------------------------------
+@Parameters({"name1", "name2"})
+
+step1) created test case
+step2) create xml file then run test case through xml
+step3) passed browser name, url as parameters from xml file to setup() method
+step4) execute test case on chrome, firefox & Edge (serial execution)
+step5) execute test case on chrome, firefox & Edge (parallel execution)
+
+give thread-count (2-5) which is enough
+increasing no of threads will reduce performance as more memory
+will be taken for multiple(>5) threads running concurrently.
+
+* parallel testing reduces the time. (diff will be seen for large no of tests)
+
+
+
+
+
+  ------------------
+#  TestNG Listners 
+  ------------------
+
+Done for test cases after test (passes, fails, or skipped) 
+
+Steps ->
+-----
+1) create test case
+2) create listener class
+3) create xml file and include both test case & listener class
+
+
+2 ways to implement listener class:
+----------------------------------
+Method1 -> class myListner implements ITestListener { }
+Method2 -> class myListener extends TestListenerAdapter { }
+
+2 ways to execute:
+------------------
+1 -> through xml file (preferred)
+2 -> By @Listeners(org.MyListener.class)
+
+* we create only 1 Listener class as Post action is same for
+  all the tests 
+Post actions -> generating report (test passed, failed, skipped)
+
+
+Extent report -> (3rd-party package)
+--------------
+ExtentSparkReporter
+ExtentReports
+ExtentTest
+
+
+maven dependency
+-----------------
+
+<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+<dependency>
+	<groupId>com.aventstack</groupId>
+	<artifactId>extentreports</artifactId>
+	<version>5.1.1</version>
+</dependency>
+
+
+
+
+
+
+

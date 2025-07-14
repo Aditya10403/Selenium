@@ -1,0 +1,83 @@
+# Behaviour - Driven Development 
+---------------------------------
+
+Behaviour-Driven Development (BDD) is the software development process that 
+Cucumber was built to support.
+
+Behavior-Driven Development (BDD) is a collaborative approach that 
+bridges the gap between business and technical teams.
+
+** BDD is about discovery, collaboration and examples (and not testing)
+
+
+# Cucumber
+-----------
+Cucumber is a tool that supports Behaviour-Driven Development (BDD).
+
+Cucumber reads executable specifications written in plain text and validates 
+that the software does what those specifications say.
+
+Specifications -> multiple examples/scenarios
+
+Scenario: Breaker guesses a word
+  Given the Maker has chosen a word
+  When the Breaker makes a guess
+  Then the Maker is asked to score
+
+In order for Cucumber to understand the scenarios, they must follow some basic 
+syntax rules, called Gherkin.
+
+## Gherkin
+----------
+Gherkin is a set of grammar rules that makes plain text structured enough for Cucumber to understand. 
+The scenario above is written in Gherkin.
+
+Gherkin serves multiple purposes:
+	* Unambiguous executable specification
+	* Automated testing using Cucumber
+	* Document how the system actually behaves
+
+** Gherkin documents are stored in ".feature" text files and are typically versioned 
+in source control alongside the software.
+
+## Step definitions
+--------------------
+A step definition carries out the action that should be performed by the step.
+
+
+┌────────────┐                 ┌──────────────┐                 ┌───────────┐
+│   Steps   │                 │     Step    │                 │          │
+│ in Gherkin├──matched with──>│ Definitions ├───manipulates──>│  System   │
+│           │                 │             │                 │          │
+└────────────┘                 └──────────────┘                 └───────────┘
+
+
+### Installation
+-----------------
+
+# Maven - Add dependency in pom.xml 
+--------
+
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.23.0</version>
+    <scope>test</scope>
+</dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

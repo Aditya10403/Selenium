@@ -1,0 +1,133 @@
+what is srs :: software requirement specification
+
+level of testing mainly 4 types
+unit
+integration
+system
+user acceptation testing
+
+Error :: it is because of human mistake it can occur at developer level. 
+Bug/Defect :: Something which is not working according to customer requirement to a software. It occurs at Tester level.
+Failure :: it occur after reseasing the software. Identified by end user.
+
+
+Test Design Technique
+1 and 2 is BlackBox
+1. Bound Value Analysis --> Focuses on values at the boundaries of input domains. for i/p -> 1-100 --- will test 0,1 and 100,101
+2. Equavalent Partitioning --> Divides input data into valid and invalid partitions to reduce the number of test cases. test 1 invalid and 1 valid data
+
+
+3. Use Case Testing --> Based on user scenarios and interactions.
+
+What is a Test Scenario?
+A test scenario is a high-level description of what to test. It focuses on a specific functionality or feature.
+
+What is a Test Case?
+A test case is a detailed set of steps, inputs, and expected results used to verify a particular scenario.
+
+Test Scenarios for Login
+Verify login with invalid credentials.
+Verify login with blank username and password.
+Verify "Forgot Password" link functionality.
+Verify login session timeout.
+Verify login with special characters in username/password.
+
+STLC -> It is a systematic process during a s/w testing phase to ensure the quality and effectiveness of the product.
+
+	1. Requirement Analysis - understand what needs to be test
+	2. Test Plan 	      - identifying test objectives, tools and training needs
+	3. Test Case Develpment - creating detailed test case and test data
+	4. Test Env Setup       - Preparing the env where testing will be executed
+	5. Test Execution	      - to execute all test cases and logging the defects
+	6. Test Closure	      - Evaluating the test results and outcomes
+
+
+Static testing : it is an approach to test documents in the form of reviews, workthrough and inspections.
+
+Dynamic Testing : it is an approach to test the actual software by giving inputs and observing the output.
+
+functional testing : it is the testing process that ensure the software functionality as expected.
+it check the function, actions and behaviour.
+example :: incremental and non-intregrations
+
+non functional testing : it evaluate how well the software perform under certain conditions 
+like security, performance, durability.
+
+Regresion testing : it is a process where we test the software ensure that new changes do not negatively impact
+the existing funtionality of the software.
+
+unit regresion testing : only testing the specific changes or updates made by the developer.
+
+re-testing : re testing of a bug fixed by the devloper test again and again.
+
+smoke testing : it is a testing process where we do in unstable version of software to stable it.
+
+sanity testing : done after smoke testing we check basic funtionilities like login, logout.
+
+exploratory testing : it is done by exploring and understanding the application.
+
+ad-hoc testing : testing application randomly without any test cases and any business requirement document.
+
+monkey testing : is more intuitive and spontaneous, but it's done by a human tester who explores the application 
+without formal test cases.
+
+
+
+spike testing : Handle sudden traffic surge	
+example -> Everyone entering a mall at once
+
+stress testing : Push to failure & observe behavior	
+example -> Seeing how far a system can bend
+
+load testing : Test normal user activity	
+example -> Daily commute on a highway
+
+
+
+The Defect Life Cycle is the journey a bug goes through from the moment it's identified until it's fixed and 
+closed. Each stage ensures the issue is tracked, addressed, and verified. Here's a typical flow:
+
+New: When a tester finds a bug and logs it, it's marked as New.
+
+Assigned: The bug is assigned to a developer for investigation and fixing.
+
+Open: The developer acknowledges the bug and starts working on it.
+
+Fixed: The developer resolves the issue and marks it as Fixed.
+
+Retest: The tester rechecks the fix in a new build.
+
+Verified: If the issue no longer exists, it's marked as Verified.
+
+Closed: If everything is confirmed, the bug is officially Closed.
+
+
+Duplicate: If the defect is repeated twice to a bug, the status is changed to “duplicate.”
+
+Rejected: If the developer feels the defect is not a genuine defect then it changes the defect to “rejected.”
+
+Deferred: If the present bug is not of a high priority and expected to get fixed in the future release
+
+Not a bug: If it does not affect the functionality of the application
+
+
+Agile is a flexible way of building software in small steps, rather than trying to do everything at once.
+The 4 Agile Values (in plain words):
+Individuals and interactions over processes and tools → People talking and working together is more important than 
+relying just on tools.
+
+Working software over comprehensive documentation → It's better to deliver working features than spend too much time 
+writing everything down first.
+
+Customer collaboration over contract negotiation → Working closely with customers regularly helps build better 
+software than just sticking to a fixed contract.
+
+Responding to change over following a plan → Being flexible and adapting to feedback is more valuable than rigidly 
+following a set plan.
+
+
+scrum in agile :: 
+
+
+
+

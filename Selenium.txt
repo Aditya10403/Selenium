@@ -1,0 +1,721 @@
+---------------------
+# Selenium WebDriver
+---------------------
+
+Selenium is free(open source) tool which is used to automate and validate web applications
+It is a Suite of software's
+-> Selenium IDE (Integrated development Env) - its a record and playback tool
+-> Selenium RC (Remote Control) - a server that allows user to create test scripts in a desired programming language
+-> Selenium WebDriver - WebDriver directly communicates with the web browser and uses its native compatibility to automate
+-> Selenium Grid - used to distribute your test execution on multiple platforms and environments concurrently.
+
+# DAdv ->
+ Selenium supports testing of only web based applications
+ Mobile applications cannot be tested using Selenium
+ Captcha and Bar code readers cannot be tested using Selenium
+ Reports can only be generated using third party tools like TestNG or Junit.
+
+
+Q.What is selenium webdriver?
+------------------------------
+1) WebDriver is one of the component in selenium.
+2) WebDriver is a java interface.
+3) WebDriver is an API(Application Programming interface)
+
+
+WebDriver(I) ---> RemoteWebDriver(C) ---> ChromeDriver , FirefoxDriver, EdgeDriver etc..
+
+Environment setup
+------------------
+1) Downloading jars files and attaching them to Java project.(Manually) - Not recomended
+	-> created new java project
+	-> downloaded webdriver jars(.zip) and extracted.
+	-> attach jars to java project.
+
+
+2) Creating Maven project (Recommended)
+	-> Created a new Maven project in eclipse
+	-> addedd webdriver dependecy in pom.xml--> updated
+* Maven is a tool that helps you manage and build Java projects more easily
+
+
+Stable: 4.18.1 (February 19, 2024)
+
+pom.xml ---> dependencies
+
+https://mvnrepository.com/
+web driver dependecy link: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+
+
+
+
+-----------
+# Locators
+-----------
+1) id
+2) name
+3) linkText
+4) partialLinkText
+
+5) TagName
+6) classname
+
+7) CSS selector
+8) XPath
+
+<input type="text" name="search" value="" placeholder="Search" class="form-control form-control-lg">
+
+input - tagname
+type, name, value, placeholder ---> attributes/properties
+
+name="search"
+name--> attribute
+search ---> value
+
+
+findElement(By.name("search")) ----> WebElement
+
+WebElement searchBox = driver.findElement(By.name("search"));
+
+String s="welcome";
+s.lenght()
+"welcome".length();
+
+Employee emp=new Employee();
+emp.display();
+
+new Employee().display();
+
+<a href="http://www.xyz.com">Click</a>
+booklets
+By.partialLinkText("lets")
+
+
+findElement(loc) Vs findElements(loc)
+--------------------------------------
+
+Scenario1: Locator is matching with single web element
+----------
+findElement(loc) ----> single web element ---> WebElement
+findElements(loc) ---> single web element ----> List<WebElement>
+
+Sceanrio2: Locator is matching with multiple web elements
+----------
+findElement(loc) ---> single web element --> WebElement
+findElements(loc) ---> multiple web elements ---> List<WebElement>
+
+Scenario3: Locator is not matching with any element.
+----------
+findElement(loc)  ----> NosuchElementException
+findElements(loc) ----> will not throw any exception. Returns 0 
+
+
+
+
+---------------
+# CSS Selector
+---------------
+CSS - Cascading Style Sheets
+
+tag id			tag#id
+tag class			tag.classname
+tag attribute   		tag[attribute="value"]
+tag class attribute 	tag.classname[attribute="value"]
+
+
+
+
+--------
+# XPath
+--------
+XPath is an address of the element.
+
+DOM - Document Object Model
+
+2 types of xpath
+-----------------
+1) Absolute xpath(full xpath)
+	Ex: /html/body/header/div/div/div[2]/div/input
+
+2) Relative xpath(partial xpath)
+	Ex: //*[@name="search"]
+
+Q.Which xpath will be prefered?
+-> Relative xpath
+
+
+Difference between Absolute & Relative xpaths?
+----------------------------------------------
+1) Absolute xpath starts with  /     ---> represents root node
+   Relative xpath starts with  //
+
+2) Abosulate xpath do not use attributes
+   Relative xpath works with attribute
+
+3) Absolute xpath traverse through each node till it finds element
+   Relative xpath directly jump and find the element by using attribute
+
+
+Relative xpath
+---------------
+1) Automatically - Devtools, selectorshub
+2) Manually(own xpath) 
+
+
+//img[@title='Your Store']
+/html[1]/body[1]/header[1]/div[1]/div[1]/div[1]/div[1]/a[1]/img[1]
+
+
+syntax:
+-------
+//tagname[@attribute='value']
+//*[@attribute='value']
+
+//img[@title='MacBook']
+
+
+Xpath with single attribute
+----------------------------
+driver.findElement(By.xpath("//input[@placeholder='Search']")).sendKeys("TShirts");
+	
+
+xpath with multiple attributes
+------------------------------
+//input[@name='search'][@placeholder='Search']
+
+
+xpath with 'and' 'or' operators
+-------------------------------
+//input[@name='search' and @placeholder='Search']
+//input[@name='search' or @placeholder='Search']
+
+
+xpath with inner text - text()
+------------------------------
+//a[text()='Desktops']
+//a[text()='MacBook']
+
+
+<a href="https://xyz.com"> Click Me </a>
+linktext = yes
+inner text = yes
+
+<div>welcome</div>
+linktext= no
+innertext= yes
+
+
+xpath with contains()
+---------------------
+//input[contains(@placeholder,'Sea')]
+
+
+handling dynamic attributes
+---------------------------
+//*[@id='start' or @id='stop']
+//*[contains(@id,'st')]
+//*[starts-with(@id,'st')]
+
+
+name = xyz001  xyz002   xyz 003 xyz004 xyz001 xyz 002
+//*[contains(@name,'xyz')]
+//*[contains(@name,'00')]
+//*[starts-with(@name,'xyz')]
+
+
+name = 1xyz 2xyz 3xyz 4xyz 1xyz
+//*[contains(@name,'xyz')]
+
+
+name = 101xyz  201xyz  301xyz  401xyz
+//*[contains(@name,' xyz')]
+//*[contains(@name,' 01')]
+
+
+chained xpath
+--------------
+//div[@id='logo']/a/img
+
+
+<div></div>
+//div[contains(text(),'')]
+//[contains(.,’ ‘)] 
+
+
+
+
+--------------
+# XPath axis
+-------------
+
+self
+parent
+child
+ancestor
+descendent
+following
+preceding
+following-sibling
+preceding-sibling
+
+
+--------------------
+# WebDriver Methods
+--------------------
+1) get methods
+2) conditional methods
+3) browser methods 
+4) navigational methods
+5) wait methods
+
+
+get methods -> we can access these methods through WebDriver instance
+-----------
+get(url) - opens the url on the browser
+getTitle() - returns title of the page
+getCurrentUrl() - retuns URL of the page
+getPageSource()- returns source code of the page
+getWindowHandle() - returns ID of the single Browser window
+getWindowHandles() - retuns ID's of the multiple browser windows
+
+
+Conditional methods -> access these commands through WebElement
+-------------------
+retuns boolean value(true/false)
+
+isDisplayed() - we can check display status of the element
+isEnabled()   - we can check enable/disable status of the element/operational element
+isSelected()  - we can use to check the element is selected or not
+
+
+Browser methods
+---------------
+close() - close single browser
+quit()  - close multiple browsers
+
+
+
+
+---------------
+# Wait methods
+---------------
+
+Synchronization
+
+NoSuchElementException   - Element is not present on the page. Synchronization.
+ElementNotFoundException - Locator is in-correct
+
+Thread.sleep(time in ms) -> Thread.sleep(5000); // 5s
+------------
+
+Adv:
+----
+1) easy to use
+
+DisAdv
+-------------
+1) if the time is not suffitient then you will get exception
+2) it will wait for maximum time out. this will reduce the performace script.
+3) multiple times 
+
+
+implicit wait ->
+-------------
+driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+Adv:
+1) single time/one statement
+2) it will not wait till maximum time if the element is availble
+3) Applicable for all the elements
+4) easy to use
+
+Disadvantge:
+1) if the time is not suffitient then you will get exception
+
+
+explicit wait ->
+-------------
+works based on the time and condition
+
+declaration
+use
+
+points
+------
+1) Conditional based, it will work more effectively.
+2) finding element is inclusive
+3) it will wait for condition to be true, then consider the time
+4) we need to write multiple statements for multiple elements 
+
+conditions ->
+----------
+alertIsPresent()
+elementSelectionStateToBe()
+elementToBeClickable()
+elementToBeSelected()
+frameToBeAvaliableAndSwitchToIt()
+presenceOfAllElementsLocatedBy()
+presenceOfElementLocated()
+textToBePresentInElement()
+textToBePresentInElementLocated()
+textToBePresentInElementValue()
+titleIs()
+titleContains()
+visibilityOf()
+visibilityOfAllElements()
+visibilityOfAllElementsLocatedBy()
+visibilityOfElementLocated()
+
+
+Fluent wait ->
+-----------
+// Declaration
+Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+       .withTimeout(Duration.ofSeconds(time))
+       .pollingEvery(Duration.ofSeconds(time))
+       .ignoring(NoSuchElementException.class);
+
+// Usage
+WebElement foo = wait.until(new Function<WebDriver, WebElement>() {
+     public WebElement apply(WebDriver driver) {
+       	return driver.findElement(By.id("foo"));
+     }
+});
+
+
+driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(5));
+
+
+
+------------------------
+# Navigational commands
+------------------------
+
+navigate().to(url)   - launch a new web browser window and navigate to the specified URL.
+navigate().back()    - takes back the user to the previous webpage
+navigate().forward() - navigate to the next web page 
+navigate().refresh() - refresh the current web page there by reloading all the web elements.
+
+driver.get()  	     ---> accepts URL in string format only
+driver.navigate().to() ---> accepts URL in the string format & URL object format.
+
+getWindowHandle()  - String of id
+getWindowHandles() - Set<String> of ids
+
+driver.switchTo().window(windowID)
+
+
+
+
+-------------------------------
+# CheckBoxes and Radio Buttons
+-------------------------------
+
+1) Drop down having select tag in DOM.
+2) DropDown not having select tag in DOM (input/div) - Bootstrap dropdown
+3) Auto Suggest drop down (Dynamic)
+
+Select class
+
+
+
+
+---------
+# Alerts
+---------
+
+accept()
+
+driver.switchTo().alert().accept()    // close alert box using ok button
+driver.switchTo().alert().dismiss()   // close alert box using cancel button
+driver.switchTo().alert().getText()   // capture text value from alert
+driver.switchTo().alert().sendKeys()  // pass the text into inputbox inside the alert
+
+Q.How to capture alert box without using switchTo().alert() ?
+Ans: using explicit wait
+
+
+frames ->
+------
+driver.switchTo().frame(name)
+driver.switchTo().frame(id)
+driver.switchTo().frame(WebElement)
+driver.switchTo().frame(index)
+
+driver.switchTo().defaultContent();
+inner frame/nested frame
+
+
+
+
+---------------
+# Dropdown box
+---------------
+
+1) select dropdown
+2) Bootstrap dropdown
+3) hidden drop down
+
+
+select dropdown ->
+----------------
+Select
+
+selectByVisibleText("India")
+selectByValue("in")
+selectByIndex(0)
+
+<Select id="country">
+ 	<option value="in">India<option>
+ 
+
+getOptions() ---> returns all the options from the dropdown as a List<WebElement>.
+
+
+
+
+-------------
+# Web Tables
+-------------
+1) static web table
+2) Dynamic web table
+3) table with pagination
+
+
+r=2
+c=3
+//table[@name='BookTable']//tr["+r+"]//td["+c+"]
+
+
+
+
+
+-------------------------------
+# Dynamic table with pagination
+-------------------------------
+
+String s="Showing 1 to 10 of 19081 (13232 Pages)"
+s.substring(s.indexOf("(")+1,s.indexOf("Pages")-1)   --> 1909
+
+
+
+
+
+----------------
+# Mouse actions
+----------------
+
+Mouse hover    --- moveToElement(element)
+right click    --- contextClick(element)
+double click   --- doubleClick(element)
+drag and drop  --- dragAndDrop(source, target)
+
+
+Actions -> pre defined class provided in selenium
+-------
+build()   - create an action
+perform() - complete an action
+
+
+getText()  Vs getAttribute(attribute)
+-------------------------------------
+
+<input id="xyz"> welcome </input>
+
+getText() --> returns the inner text   --> welcome
+getAttribute("id") -- returns the value of attribute ---> xyz
+
+
+<input value="welcome"></input>
+getAttribute("value") ---> welcome
+
+
+getText() ----> returns inner text of the web element
+getAttribute(attribute)--->> returns value of attribute
+
+
+
+Actions Vs Action
+------------------
+
+Actions -- class, will be used to perform mouse actions,
+Action --- interface, will be used to store created actions.
+
+
+
+
+
+---------
+# Slider 
+---------
+
+dragAndDropBy(Element, x, y)
+
+Keyboard actions - Actions 
+----------------
+keyDown()
+keyUp()
+
+
+Ex: Ctrl+shift+A
+act.keyDown(Keys.CONTROL).keyDown(Keys.SHIFT).sendKeys("A").keyUp(Keys.SHIFT).keyUp(Keys.CONTROL).perform();
+
+Ex: Enter
+act.keyDown(Keys.ENTER).keyUp(Keys.ENTER).perform();
+
+// Control+Reglink
+act.keyDown(Keys.CONTROL).click(regLink).keyUp(Keys.CONTROL).perform();
+
+
+
+
+---------------------
+# JavascriptExecutor
+---------------------
+
+JavascriptExecutor - interface
+------------------
+executeScript() - we can execute javascript statements
+
+Use Cases ->
+	sendKeys()
+	click()
+
+
+-> Scrolling bar
+-> Upload files
+
+** We cast the webdriver instance to interfaces like (JavaScriptExecutor) and (TakesScreenshot) bcoz these
+	are not directly the part of webdriver interface thats why we need
+	to explicitly cast to use there methods
+
+
+---------------------------------------------------------------------------
+# Capture SC, Handle SSL, Headless browser, Blocking Ads, Chrome Extension
+---------------------------------------------------------------------------
+
+How to capture screenshots
+--------------------------
+1) full page
+2) specific area of the page
+3) web element
+
+
+ChromeOptions
+EdgeOptions
+FirefoxOptions
+etc...
+
+
+ChromeOptions
+--------------
+
+Headless testing ->
+----------------
+ChromeOptions options=new ChromeOptions();
+options.addArguments("--headless=new"); 
+
+advantages
+----------
+1) we can do multiple tasks( since execution happend backend)
+2) faster execution
+
+disadvantage
+-----------
+1) user cannot see the actions on the page. so he cannot understand flow/functionality of the test.
+
+
+SSL Handling ->
+-------------	
+ChromeOptions options = new ChromeOptions();
+options.setAcceptInsecureCerts(true); // accepts SSL certificates
+
+
+to remove "Chrome is being controlled by automated test software"
+------------------------------------------------------------------
+ChromeOptions options = new ChromeOptions();
+options.setExperimentalOption("excludeSwitches", new String[] {"enable-automation"});
+			
+
+To run the tests in Incognito mode
+------------------------------------
+ChromeOptions options=new ChromeOptions();
+options.addArguments("--incognito");
+
+
+Enable browser extension in run time
+------------------------------------
+step 1: Add CRX Extractor/Downloader to chrome Browser (manually)
+Step2 : Add SelectorsHub plugin to chrome browser (manually)
+step3 : Capture crx file for selectorshub extension
+Step4: pass crx file path in automation script in Chrome Options
+
+
+ChromeOptions options=new ChromeOptions();
+options.addExtensions(new File("C:\\Drivers\\SelectorsHub.crx"));
+
+
+How to block ads on the page
+-----------------------------
+uBlock-Origin
+AdBlocker
+
+
+
+
+
+---------------
+# Broken links
+---------------
+
+1) Link    href="https://xyz.com"
+
+2) https://xyz.com ---> server ---> status code
+
+3)  status code >= 400  broken link
+    status code  < 400   not a broken link
+	
+Shandow DOM ->
+------------
+XPath cannot handle shadow dom elements.
+Only CSS can handle shadow dom elements.
+
+
+// 1) This Element is inside single shadow DOM.
+
+SearchContext shadow = driver.findElement(By.cssSelector("#shadow-root")).getShadowRoot();
+Thread.sleep(1000);
+shadow.findElement(By.cssSelector("#shadow-element"));
+
+
+// 2) This Element is inside 2 nested shadow DOM.
+
+SearchContext shadow0 = driver.findElement(By.cssSelector("#shadow-root")).getShadowRoot();
+Thread.sleep(1000);
+SearchContext shadow1 = shadow0.findElement(By.cssSelector("#inner-shadow-dom")).getShadowRoot();
+Thread.sleep(1000);
+shadow1.findElement(By.cssSelector("#nested-shadow-element"));
+
+
+
+// 3) This Element is inside 3 nested shadow DOM.
+
+SearchContext shadow0 = driver.findElement(By.cssSelector("#shadow-root")).getShadowRoot();
+Thread.sleep(1000);
+
+SearchContext shadow1 = shadow0.findElement(By.cssSelector("#inner-shadow-dom")).getShadowRoot();
+Thread.sleep(1000);
+
+SearchContext shadow2 = shadow1.findElement(By.cssSelector("#nested-shadow-dom")).getShadowRoot();
+Thread.sleep(1000);
+
+shadow2.findElement(By.cssSelector("#multi-nested-shadow-element"));
+
+
+Handle svg elements
+--------------------
+//*[name()='path' and contains(@d,'M256,302c8')]
+//a[normalize-space()='']//*[name()='svg']
+//*[name()='path' and contains(@d,'M256.264,0')]
+
+

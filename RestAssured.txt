@@ -1,0 +1,26 @@
+package com.rest.assured;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+
+public class RestAssured_ {
+
+	public static void main(String[] args) {
+		RestAssured.useRelaxedHTTPSValidation();
+	  Response res = RestAssured.given()
+			                      .baseUri("https://reqres.in")
+			                      .basePath("/api/register")
+			                     // .queryParam("page", "2")
+			                      .body("{ \"email\": \"tetssss.holt@reqres.in\", \"password\": \"pistol\" }")
+			                      .header("Content-Type","application/json")
+			                      .header("x-api-key","reqres-free-v1")
+			                      .when()
+			                        .post();		                      ;
+	 System.out.println("data::"+res.asString());
+	// System.out.println("data::"+res.contentType());
+	 
+	 
+
+	}
+
+}

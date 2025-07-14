@@ -1,0 +1,41 @@
+  ------------------
+#  Page Object model -> It is a Design Pattern not a framework.
+  ------------------
+
+* locators, webelements and test cases are separated  
+
+Test case
+---------
+locators
+test methods ---> code ---> validations+Actions
+
+2 appraoches to create page object classes
+------------------------------------------
+1) without using PageFactory
+2) using PageFactory
+
+
+WebElement usertxt = driver.findElement(By.xpath("//input[@placeholder='Username']");
+
+By loc=By.xpath("//input[@placeholder='Username'];
+driver.findElement(loc).sendKeys("xyz")
+
+
+* Problems without POM
+  ---------------------
+-> Duplication of elements/locators
+-> During Updation of any attribute/element 
+
+
+Page Object classes contains
+----------------------------
+page Elements + Action Methods
+
+Working flow ->
+------------
+XML -> TC(Test Case) -> POC(Page Object Class) -> AUT(Application Under Test)
+
+
+
+
+

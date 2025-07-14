@@ -1,0 +1,82 @@
+Cucumber
+--------
+What is Cucumber?
+-> Cucumber is a tool for running automated tests written in plain language. It supports Behavior Driven Development (BDD).
+
+Behavior-Driven Development (BDD) is a collaborative approach that bridges the gap between business and technical teams.
+** BDD is about discovery, collaboration and examples (and not testing)
+
+What is Gherkin?
+-> Gherkin is the language used to write Cucumber tests. It uses plain English to describe software behaviors.
+
+What is a feature file in Cucumber?
+-> A feature file contains the test scenarios written in Gherkin language.
+
+What is a step definition in Cucumber?
+-> A step definition is the actual code that executes the steps described in the feature file.
+
+
+Feature: User Login and Logout
+
+  Scenario: Successful Login with Valid Credentials
+    Given the user is on the login page
+    When the user enters valid credentials
+    And the user clicks on the login button
+    Then the user should be redirected to the homepage
+    And the user should see a welcome message
+
+  Scenario: Successful Logout
+    Given the user is logged in
+    When the user clicks on the logout button
+    Then the user should be redirected to the login page
+    And the user should see a logout confirmation message
+
+
+
+Jenkins
+--------
+What is Jenkins?
+-> Jenkins is an open-source automation server used to automate parts of software development, such as building, testing, and deploying.
+
+What is a Jenkins pipeline?
+-> A Jenkins pipeline is a suite of plugins that supports implementing and integrating continuous delivery pipelines.
+
+How do you create a Jenkins job?
+-> You can create a Jenkins job by navigating to the Jenkins dashboard, clicking on "New Item," and configuring the job settings.
+
+What is a Jenkinsfile?
+-> A Jenkinsfile is a text file that contains the definition of a Jenkins pipeline.
+
+
+RestAssured API Testing
+------------------------
+What is RestAssured?
+-> RestAssured is a Java library used for testing and validating RESTful web services.
+
+How do you perform a GET request using RestAssured?
+-> You can perform a GET request using RestAssured.given().get("/endpoint").
+
+What is the purpose of given(), when(), and then() in RestAssured?
+-> These methods are used to define the request specification, perform the request, and validate the response, respectively.
+
+How do you validate the status code of a response in RestAssured?
+-> You can validate the status code using then().statusCode(200).
+
+
+DevOps
+-------
+What is DevOps?
+-> DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle 
+   and deliver high-quality software continuously.
+
+What are some common DevOps tools?
+-> Common DevOps tools include Jenkins, Docker, Kubernetes, Ansible, and Git.
+
+What is continuous integration (CI)?
+-> Continuous integration is the practice of merging all developers' working copies to a shared mainline several times a day.
+
+What is continuous deployment (CD)?
+-> Continuous deployment is the practice of automatically deploying every change that passes automated tests to production.
+
+
+	
